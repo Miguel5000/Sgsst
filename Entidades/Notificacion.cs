@@ -17,13 +17,9 @@ namespace Entidades
         [Column("id")]
         public int? Id { get => id; set => id = value; }
 
-        [ForeignKey("TipoNotificacion")]
         [Required(ErrorMessage = "La notificación debe ser de cierto tipo")]
         [Column("id_tipo_notificacion")]
         public int? IdTipoNotificacion { get => idTipoNotificacion; set => idTipoNotificacion = value; }
-
-        //Llaves foráneas
-        public TipoNotificacion TipoNotificacion { get; set; }
 
     }
 }

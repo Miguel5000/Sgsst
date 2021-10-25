@@ -20,12 +20,10 @@ namespace Entidades
         [Column("id")]
         public int? Id { get => id; set => id = value; }
 
-        [ForeignKey("Acta")]
         [Required(ErrorMessage = "La asistencia debe estar asociada a un acta")]
         [Column("id_acta")]
         public int? IdActa { get => idActa; set => idActa = value; }
 
-        [ForeignKey("Usuario")]
         [Required(ErrorMessage = "La asistencia debe estar asociada a un usuario")]
         [Column("id_usuario")]
         public int? IdUsuario { get => idUsuario; set => idUsuario = value; }
@@ -33,10 +31,6 @@ namespace Entidades
         [Required(ErrorMessage = "La asistencia debe indicar si el usuario ya ha aprobado el acta")]
         [Column("aprobacion")]
         public bool? Aprobacion { get => aprobacion; set => aprobacion = value; }
-
-        //Llaves foráneas
-        public Acta Acta { get; set; }
-        public Acta Usuario { get; set; }
 
     }
 

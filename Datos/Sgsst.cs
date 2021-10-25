@@ -3,12 +3,26 @@ using System.Data.Entity;
 
 namespace Datos
 {
-    public class Mapeo: DbContext
+    public class Sgsst : DbContext
     {
 
-        public Mapeo() : base("name=Sgsst")
+        private static Sgsst sgsst;
+
+        private Sgsst() : base("name=Sgsst")
         {
 
+        }
+
+        public static Sgsst GetControlador() {
+
+            if (sgsst == null) {
+
+                sgsst = new Sgsst();
+
+            }
+
+            return sgsst;
+        
         }
 
         public DbSet<Acta> actas { get; set; }

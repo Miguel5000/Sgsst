@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -28,22 +29,18 @@ namespace Entidades
         [Column("id")]
         public int? Id { get => id; set => id = value; }
 
-        [ForeignKey("Lugar")]
         [Required(ErrorMessage = "El acta debe tener el lugar de la reunión")]
         [Column("id_lugar")]
         public int? IdLugar { get => idLugar; set => idLugar = value; }
 
-        [ForeignKey("GrupoSgsst")]
         [Required(ErrorMessage = "El acta debe tener el grupo del SGSST que hizo la reunión")]
         [Column("id_grupo")]
         public int? IdGrupo { get => idGrupo; set => idGrupo = value; }
 
-        [ForeignKey("TipoActa")]
         [Required(ErrorMessage = "El acta debe ser de cierto tipo")]
         [Column("id_tipo")]
         public int? IdTipo { get => idTipo; set => idTipo = value; }
 
-        [ForeignKey("Empresa")]
         [Required(ErrorMessage = "El acta debe pertenecer a una empresa")]
         [Column("id_empresa")]
         public int? IdEmpresa { get => idEmpresa; set => idEmpresa = value; }
@@ -79,12 +76,6 @@ namespace Entidades
         [Required(ErrorMessage = "El acta debe tener la conclusión de la reunión")]
         [Column("conclusion")]
         public string Conclusion { get => conclusion; set => conclusion = value; }
-
-        //Llaves foráneas
-        public Lugar Lugar { get; set; }
-        public GrupoSgsst GrupoSgsst { get; set; }
-        public TipoActa TipoActa { get; set; }
-        public Empresa Empresa { get; set; }
 
     }
 

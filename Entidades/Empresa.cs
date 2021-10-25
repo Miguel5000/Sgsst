@@ -23,7 +23,6 @@ namespace Entidades
         [Column("id")]
         public int? Id { get => id; set => id = value; }
 
-        [ForeignKey("TipoBrigada")]
         [Column("id_tipo_brigada")]
         public int? IdTipoBrigada { get => idTipoBrigada; set => idTipoBrigada = value; }
 
@@ -50,9 +49,6 @@ namespace Entidades
         [StringLength(15, ErrorMessage = "El número de teléfono no puede superar los 15 caracteres")]
         [Column("telefono")]
         public string Telefono { get => telefono; set => telefono = value; }
-
-        //Llaves foráneas
-        public TipoBrigada TipoBrigada { get; set; }
 
     }
 }

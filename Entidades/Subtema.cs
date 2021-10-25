@@ -19,11 +19,9 @@ namespace Entidades
         [Column("id")]
         public int? Id { get => id; set => id = value; }
 
-        [ForeignKey("GrupoSgsst")]
         [Column("id_grupo")]
         public int? IdGrupo { get => idGrupo; set => idGrupo = value; }
 
-        [ForeignKey("Acta")]
         [Required(ErrorMessage = "El subtema debe pertenecer a un acta")]
         [Column("id_acta")]
         public int? IdActa { get => idActa; set => idActa = value; }
@@ -31,10 +29,6 @@ namespace Entidades
         [Required(ErrorMessage = "El subtema debe tener un contenido")]
         [Column("subtema")]
         public string SubtemaActa { get => subtemaActa; set => subtemaActa = value; }
-
-        //Llaves foráneas
-        public GrupoSgsst GrupoSgsst { get; set; }
-        public Acta Acta { get; set; }
 
     }
 }

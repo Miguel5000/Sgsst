@@ -1,6 +1,7 @@
-﻿using Entidades;
-using System;
+﻿using Datos;
+using Entidades;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logica
 {
@@ -9,38 +10,40 @@ namespace Logica
 
         public List<Acta> GetActas(GrupoSgsst grupo, TipoActa tipoActa, Empresa empresa) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().actas.Where(x => x.IdGrupo == grupo.Id && 
+            x.IdTipo == tipoActa.Id && 
+            x.IdEmpresa == empresa.Id).ToList();
 
         }
 
         public Acta Get(int id) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().actas.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
         public void Crear(Acta acta) {
 
-            throw new NotImplementedException();
+            Crud.Insertar(acta);
 
         }
 
         public void Editar(Acta acta) {
 
-            throw new NotImplementedException();
+            Crud.Actualizar(acta);
 
         }
 
         public void Eliminar(Acta acta)
         {
 
-            throw new NotImplementedException();
+            Crud.Eliminar(acta);
 
         }
 
         public TipoActa GetTipo(int id) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().tiposActa.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
@@ -48,53 +51,56 @@ namespace Logica
 
         public List<Subtema> GetSubtemas(Acta acta) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().subtemas.Where(x => x.IdActa == acta.Id).ToList();
 
         }
 
         public void CrearSubtema(Subtema subtema) {
 
-            throw new NotImplementedException();
+            Crud.Insertar(subtema);
 
         }
 
         public void EditarSubtema(Subtema subtema) {
 
-            throw new NotImplementedException();
+            Crud.Actualizar(subtema);
 
         }
 
         public void EliminarSubtema(Subtema subtema) {
 
-            throw new NotImplementedException();
+            Crud.Eliminar(subtema);
 
         }
 
         //Asistencias
 
-        public List<Asistencia> GetAsistencias(Acta acta) {
+        public List<Usuario> GetAsistencias(Acta acta) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().asistencias.Where(x => x.IdActa == acta.Id).Join(Sgsst.GetControlador().usuarios,
+                asistencia => asistencia.IdUsuario,
+                usuario => usuario.Id,
+                (asistencia, usuario) => usuario).ToList();
 
         }
 
         public void CrearAsistencia(Asistencia asistencia) {
 
-            throw new NotImplementedException();
+            Crud.Insertar(asistencia);
 
         }
 
         public void EditarAsistencia(Asistencia asistencia)
         {
 
-            throw new NotImplementedException();
+            Crud.Actualizar(asistencia);
 
         }
 
         public void EliminarAsistencia(Asistencia asistencia)
         {
 
-            throw new NotImplementedException();
+            Crud.Eliminar(asistencia);
 
         }
 

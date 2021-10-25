@@ -9,7 +9,7 @@ namespace Logica
 {
     public class LEmpresa
     {
-        private Mapeo mapeo = new Mapeo();
+        private Sgsst mapeo = new Sgsst();
         public Empresa Get(int id) {
 
             throw new NotImplementedException();

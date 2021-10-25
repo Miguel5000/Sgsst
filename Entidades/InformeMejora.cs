@@ -21,7 +21,6 @@ namespace Entidades
         [Column("id")]
         public int? Id { get => id; set => id = value; }
 
-        [ForeignKey("Empresa")]
         [Required(ErrorMessage = "El informe debe pertenecer a une empresa")]
         [Column("id_empresa")]
         public int? IdEmpresa { get => idEmpresa; set => idEmpresa = value; }
@@ -38,9 +37,6 @@ namespace Entidades
         [Required(ErrorMessage = "El informe debe tener las medidas tomadas en la reunión")]
         [Column("medidas")]
         public string Medidas { get => medidas; set => medidas = value; }
-
-        //Llaves foráneas
-        public Empresa Empresa { get; set; }
 
     }
 

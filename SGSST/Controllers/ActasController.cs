@@ -4,6 +4,7 @@ using SGSST.Utilidades;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace SGSST.Controllers
@@ -48,6 +49,7 @@ namespace SGSST.Controllers
             return request.CreateResponse(HttpStatusCode.OK, acta);
 
         }
+
 
         [HttpPost]
         public HttpResponseMessage Crear(HttpRequestMessage request, [FromBody]Acta acta)
@@ -167,11 +169,11 @@ namespace SGSST.Controllers
 
             if (validacion != null) return validacion;
 
-            List<Asistencia> asistencias = logicaActa.GetAsistencias(acta);
+            List<Usuario> usuarios = logicaActa.GetAsistencias(acta);
 
-            if (asistencias.Count == 0) return new HttpResponseMessage(HttpStatusCode.NotFound);
+            if (usuarios.Count == 0) return new HttpResponseMessage(HttpStatusCode.NotFound);
 
-            return request.CreateResponse(HttpStatusCode.OK, asistencias);
+            return request.CreateResponse(HttpStatusCode.OK, usuarios);
 
         }
 

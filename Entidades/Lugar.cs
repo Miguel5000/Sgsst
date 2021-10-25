@@ -18,7 +18,6 @@ namespace Entidades
         [Column("id")]
         public int? Id { get => id; set => id = value; }
 
-        [ForeignKey("Empresa")]
         [Required(ErrorMessage = "El lugar debe estar asociado a una empresa")]
         [Column("id_empresa")]
         public int? IdEmpresa { get => idEmpresa; set => idEmpresa = value; }
@@ -29,7 +28,5 @@ namespace Entidades
         [Column("nombre")]
         public string Nombre { get => nombre; set => nombre = value; }
 
-        //Llaves foráneas
-        public Empresa Empresa { get; set; }
     }
 }

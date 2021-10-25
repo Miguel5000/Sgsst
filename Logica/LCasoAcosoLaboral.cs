@@ -1,6 +1,8 @@
-﻿using Entidades;
+﻿using Datos;
+using Entidades;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logica
 {
@@ -9,13 +11,13 @@ namespace Logica
 
         public List<CasoAcosoLaboral> GetCasos(Empresa empresa) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().casos.Where(x => x.IdEmpresa == empresa.Id).ToList();
 
         }
 
         public List<CasoAcosoLaboral> GetCasos(Usuario usuario) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().casos.Where(x => x.IdCreador == usuario.Id).ToList();
 
         }
 

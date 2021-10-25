@@ -1,6 +1,8 @@
-﻿using Entidades;
+﻿using Datos;
+using Entidades;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logica
 {
@@ -9,27 +11,27 @@ namespace Logica
 
         public List<Area> GetAreas(Empresa empresa) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().areas.Where(x => x.IdEmpresa == empresa.Id).ToList();
 
         }
 
         public void Crear(Area area) {
 
-            throw new NotImplementedException();
+            Crud.Insertar(area);
 
         }
 
         public void Editar(Area area)
         {
 
-            throw new NotImplementedException();
+            Crud.Actualizar(area);
 
         }
 
         public void Eliminar(Area area)
         {
 
-            throw new NotImplementedException();
+            Crud.Eliminar(area);
 
         }
 

@@ -15,6 +15,7 @@ namespace Entidades
         private int? idCreador;
         private int? idCausa;
         private int? idEstado;
+        private int? idEmpresa;
         private DateTime? fecha;
         private string hechos;
         private string sugerencia;
@@ -27,20 +28,21 @@ namespace Entidades
         [Column("id")]
         public int? Id { get => id; set => id = value; }
 
-        [ForeignKey("Usuario")]
         [Required(ErrorMessage = "El caso de acoso laboral debe tener un creador")]
         [Column("id_creador")]
         public int? IdCreador { get => idCreador; set => idCreador = value; }
 
-        [ForeignKey("CausaCaso")]
         [Required(ErrorMessage = "El caso de acoso laboral debe tener una causa")]
         [Column("id_causa")]
         public int? IdCausa { get => idCausa; set => idCausa = value; }
 
-        [ForeignKey("EstadoCaso")]
         [Required(ErrorMessage = "El caso de acoso laboral debe tener un estado")]
         [Column("id_estado")]
         public int? IdEstado { get => idEstado; set => idEstado = value; }
+
+        [Required(ErrorMessage = "El caso de acoso laboral debe pertenecer a una empresa")]
+        [Column("id_empresa")]
+        public int? IdEmpresa { get => idEmpresa; set => idEmpresa = value; }
 
         [Required(ErrorMessage = "El caso de acoso laboral debe tener una fecha en la que se hizo el reporte")]
         [Column("fecha")]
@@ -65,11 +67,6 @@ namespace Entidades
 
         [Column("resolucion")]
         public bool? Resolucion { get => resolucion; set => resolucion = value; }
-
-        //Llaves foráneas
-        public Usuario Usuario { get; set; }
-        public CausaCaso CausaCaso { get; set; }
-        public EstadoCaso EstadoCaso { get; set; }
 
     }
 
