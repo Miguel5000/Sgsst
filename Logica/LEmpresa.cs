@@ -1,6 +1,5 @@
 ﻿using Datos;
 using Entidades;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,16 +8,15 @@ namespace Logica
 {
     public class LEmpresa
     {
-        private Sgsst mapeo = new Sgsst();
         public Empresa Get(int id) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().empresas.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
         public void Crear(Empresa empresa) {
 
-            throw new NotImplementedException();
+            Crud.Insertar(empresa);
 
         }
 
@@ -26,14 +24,13 @@ namespace Logica
 
         public List<TipoBrigada> GetBrigadas() {
 
-            return mapeo.tiposBrigada.ToList();
-            //throw new NotImplementedException();
+            return Sgsst.GetControlador().tiposBrigada.ToList();
 
         }
 
         public TipoBrigada GetBrigada(int id){
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().tiposBrigada.Where(x => x.Id == id).FirstOrDefault();
 
         }
 

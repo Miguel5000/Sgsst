@@ -1,6 +1,7 @@
-﻿using Entidades;
-using System;
+﻿using Datos;
+using Entidades;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logica
 {
@@ -9,33 +10,33 @@ namespace Logica
 
         public List<Pqrs> GetListaPqrs(Empresa empresa) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().pqrs.Where(x => x.IdEmpresa == empresa.Id).ToList();
 
         }
 
         public List<Pqrs> GetListaPqrs(Usuario usuario)
         {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().pqrs.Where(x => x.IdUsuario == usuario.Id).ToList();
 
         }
 
         public Pqrs Get(int id) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().pqrs.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
         public void Crear(Pqrs pqrs)
         {
 
-            throw new NotImplementedException();
+            Crud.Insertar(pqrs);
 
         }
 
         public List<TipoPqrs> GetTipos() {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().tiposPqrs.ToList();
 
         }
 

@@ -1,6 +1,7 @@
-﻿using Entidades;
-using System;
+﻿using Datos;
+using Entidades;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logica
 {
@@ -8,25 +9,25 @@ namespace Logica
     {
         public List<InformeMejora> GetInformes(Empresa empresa) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().informes.Where(x => x.IdEmpresa == empresa.Id).ToList();
 
         }
 
         public InformeMejora Get(int id) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().informes.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
         public void Crear(InformeMejora informe) {
 
-            throw new NotImplementedException();
+            Crud.Insertar(informe);
 
         }
 
         public void Editar(InformeMejora informe) {
 
-            throw new NotImplementedException();
+            Crud.Actualizar(informe);
 
         }
 

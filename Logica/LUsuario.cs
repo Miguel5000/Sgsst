@@ -1,30 +1,39 @@
-﻿using Entidades;
+﻿using Datos;
+using Entidades;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logica
 {
     public class LUsuario
     {
+        private static string EMPLEADO = "Empleado";
 
         public List<Usuario> GetEmpleados(Empresa empresa)
         {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().usuarios.Where(x => x.IdEmpresa == empresa.Id).
+                Join(Sgsst.GetControlador().roles,
+                usuario => usuario.IdRol,
+                rol => rol.Id,
+                (usuario, rol) => new { u = usuario, r = rol }).
+                Where(y => y.r.Nombre == LUsuario.EMPLEADO).
+                Select(z => z.u).ToList();
 
         }
 
         public Usuario Get(Usuario usuario)
         {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().usuarios.Where(x => x.Id == usuario.Id).FirstOrDefault();
 
         }
 
         public Usuario Get(string token)
         {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().usuarios.Where(x => x.TokenRecuperarClave == token).FirstOrDefault();
 
         }
 
@@ -37,27 +46,27 @@ namespace Logica
 
         public void Crear(Usuario usuario) {
 
-            throw new NotImplementedException();
+            Crud.Insertar(usuario);
 
         }
 
         public void CambiarClave(Usuario usuario)
         {
 
-            throw new NotImplementedException();
+            Crud.Actualizar(usuario);
 
         }
 
         public void Eliminar(Usuario usuario) {
 
-            throw new NotImplementedException();
+            Crud.Eliminar(usuario);
 
         }
 
         public Rol GetRol(Usuario usuario)
         {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().roles.Where(x => x.Id == usuario.IdRol).FirstOrDefault();
 
         }
 

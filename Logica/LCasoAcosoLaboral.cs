@@ -23,31 +23,31 @@ namespace Logica
 
         public CasoAcosoLaboral Get(int id) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().casos.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
         public void Crear(CasoAcosoLaboral caso) {
 
-            throw new NotImplementedException();
+            Crud.Insertar(caso);
 
         }
 
         public EstadoCaso GetEstado(int id) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().estadosCaso.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
         public List<CausaCaso> GetCausas() {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().causas.ToList();
 
         }
 
         public void CrearInvolucrado(InvolucradosEnCaso involucracion) {
 
-            throw new NotImplementedException();
+            Crud.Insertar(involucracion);
 
         }
 

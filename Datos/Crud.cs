@@ -8,28 +8,26 @@ namespace Datos
     public class Crud
     {
 
-        private static Sgsst mapeo = new Sgsst();
-
         public static void Insertar(Object entidad){
 
-            mapeo.Entry(entidad).State = System.Data.Entity.EntityState.Added;
-            mapeo.SaveChanges();
+            Sgsst.GetControlador().Entry(entidad).State = System.Data.Entity.EntityState.Added;
+            Sgsst.GetControlador().SaveChanges();
 
         }
 
         public static void Actualizar(Object entidad)
         {
 
-            mapeo.Entry(entidad).State = System.Data.Entity.EntityState.Modified;
-            mapeo.SaveChanges();
+            Sgsst.GetControlador().Entry(entidad).State = System.Data.Entity.EntityState.Modified;
+            Sgsst.GetControlador().SaveChanges();
 
         }
 
         public static void Eliminar(Object entidad)
         {
 
-            mapeo.Entry(entidad).State = System.Data.Entity.EntityState.Deleted;
-            mapeo.SaveChanges();
+            Sgsst.GetControlador().Entry(entidad).State = System.Data.Entity.EntityState.Deleted;
+            Sgsst.GetControlador().SaveChanges();
 
         }
 

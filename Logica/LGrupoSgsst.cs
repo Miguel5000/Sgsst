@@ -1,6 +1,7 @@
-﻿using Entidades;
-using System;
+﻿using Datos;
+using Entidades;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Logica
 {
@@ -9,13 +10,13 @@ namespace Logica
 
         public List<GrupoSgsst> GetGrupos() {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().grupos.ToList();
 
         }
 
         public GrupoSgsst Get(int id) {
 
-            throw new NotImplementedException();
+            return Sgsst.GetControlador().grupos.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
