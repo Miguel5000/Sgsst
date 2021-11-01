@@ -4,11 +4,11 @@ using SGSST.Utilidades;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace SGSST.Controllers
 {
+
     public class ActasController : ApiController
     {
 

@@ -14,7 +14,7 @@ namespace SGSST.Controllers
         private LPqrs logicaPqrs = new LPqrs();
 
         [HttpPost]
-        public HttpResponseMessage GetListaPqrs(HttpRequestMessage request, [FromBody] Empresa empresa)
+        public HttpResponseMessage GetListaPqrsPorEmpresa(HttpRequestMessage request, [FromBody] Empresa empresa)
         {
 
             HttpResponseMessage validacion = Validador.Validar(request, ModelState);
@@ -30,7 +30,7 @@ namespace SGSST.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage GetListaPqrs(HttpRequestMessage request, [FromBody] Usuario usuario)
+        public HttpResponseMessage GetListaPqrsPorUsuario(HttpRequestMessage request, [FromBody] Usuario usuario)
         {
 
             HttpResponseMessage validacion = Validador.Validar(request, ModelState);

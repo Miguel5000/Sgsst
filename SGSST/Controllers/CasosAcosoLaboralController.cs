@@ -14,7 +14,7 @@ namespace SGSST.Controllers
         private LCasoAcosoLaboral logicaCasos = new LCasoAcosoLaboral();
 
         [HttpPost]
-        public HttpResponseMessage GetCasos(HttpRequestMessage request, [FromBody] Empresa empresa)
+        public HttpResponseMessage GetCasosDeEmpresa(HttpRequestMessage request, [FromBody] Empresa empresa)
         {
 
             HttpResponseMessage validacion = Validador.Validar(request, ModelState);
@@ -30,7 +30,7 @@ namespace SGSST.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage GetCasos(HttpRequestMessage request, [FromBody] Usuario usuario)
+        public HttpResponseMessage GetCasosDeUsuario(HttpRequestMessage request, [FromBody] Usuario usuario)
         {
 
             HttpResponseMessage validacion = Validador.Validar(request, ModelState);
