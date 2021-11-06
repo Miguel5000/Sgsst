@@ -26,7 +26,7 @@ namespace Logica
         public Usuario Get(Usuario usuario)
         {
 
-            return Sgsst.GetControlador().usuarios.Where(x => x.Id == usuario.Id).FirstOrDefault();
+            return Sgsst.GetControlador().usuarios.Where(x => x.Correo == usuario.Correo && x.Clave == usuario.Clave).FirstOrDefault();
 
         }
 
