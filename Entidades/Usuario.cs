@@ -24,11 +24,11 @@ namespace Entidades
         [Column("id")]
         public int? Id { get => id; set => id = value; }
 
-        [Required(ErrorMessage = "El usuario debe tener un rol")]
+        //[Required(ErrorMessage = "El usuario debe tener un rol")]
         [Column("id_rol")]
         public int? IdRol { get => idRol; set => idRol = value; }
 
-        [Required(ErrorMessage = "El usuario debe pertenecer a un área")]
+        //[Required(ErrorMessage = "El usuario debe pertenecer a un área")]
         [Column("id_area")]
         public int? IdArea { get => idArea; set => idArea = value; }
 

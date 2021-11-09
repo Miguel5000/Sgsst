@@ -34,7 +34,7 @@ namespace SGSST.Controllers
             if (validacion != null) return validacion;
 
             logicaEmpresa.Crear(empresa);
-            return new HttpResponseMessage(HttpStatusCode.Created);
+            return request.CreateResponse(HttpStatusCode.Created, empresa);
 
         }
 

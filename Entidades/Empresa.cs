@@ -15,6 +15,7 @@ namespace Entidades
         private int? idTipoBrigada;
         private string nombre;
         private string logotipo;
+        private string logotipoFront;
         private int? dimensionArea;
         private string direccion;
         private string telefono;
@@ -31,10 +32,12 @@ namespace Entidades
         [Column("nombre")]
         public string Nombre { get => nombre; set => nombre = value; }
 
-        [Required(ErrorMessage = "La empresa debe tener un logotipo")]
         [StringLength(200, ErrorMessage = "El enlace del logotipo no puede superar los 200 caracteres")]
         [Column("logotipo")]
         public string Logotipo { get => logotipo; set => logotipo = value; }
+
+        [NotMapped]
+        public string LogotipoFront { get => logotipoFront; set => logotipoFront = value; }
 
         [Required(ErrorMessage = "La empresa debe tener una dimensión")]
         [Column("dimension_area")]

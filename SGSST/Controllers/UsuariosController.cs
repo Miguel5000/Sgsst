@@ -70,6 +70,8 @@ namespace SGSST.Controllers
 
             if (validacion != null) return validacion;
 
+            usuario.IdRol = 3;
+            usuario.IdArea = 4;
             logicaUsuario.Crear(usuario);
             return new HttpResponseMessage(HttpStatusCode.Created);
 
