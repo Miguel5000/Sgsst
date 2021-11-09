@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using Logica;
+using Newtonsoft.Json.Linq;
 using SGSST.Utilidades;
 using System.Collections.Generic;
 using System.Net;
@@ -120,30 +121,17 @@ namespace SGSST.Controllers
         }
 
         [HttpPut]
-        public HttpResponseMessage GenerarToken(HttpRequestMessage request, [FromBody] Usuario usuario)
+        public HttpResponseMessage GenerarToken(HttpRequestMessage request, [FromBody] JObject correo)
         {
 
             HttpResponseMessage validacion = Validador.Validar(request, ModelState);
 
             if (validacion != null) return validacion;
 
-            logicaUsuario.GenerarToken(usuario);
+            string correo1 = correo["correo"].ToString();
+            logicaUsuario.GenerarToken(correo1);
             return new HttpResponseMessage(HttpStatusCode.OK);
 
         }
-
-        [HttpPost]
-        public HttpResponseMessage EnviarCorreo(HttpRequestMessage request, [FromBody] Usuario usuario)
-        {
-
-            HttpResponseMessage validacion = Validador.Validar(request, ModelState);
-
-            if (validacion != null) return validacion;
-
-            logicaUsuario.EnviarCorreo(usuario);
-            return new HttpResponseMessage(HttpStatusCode.OK);
-
-        }
-
     }
 }
