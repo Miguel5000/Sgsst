@@ -1,8 +1,12 @@
 ﻿using Datos;
 using Entidades;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Logica
 {
@@ -70,17 +74,56 @@ namespace Logica
 
         }
 
-        public void GenerarToken(Usuario usuario) {
+        public void GenerarToken(string correo) {
 
-            throw new NotImplementedException();
+            Usuario usuario = BuscarCorreo(correo);
+            usuario.TokenRecuperarClave = encriptar(JsonConvert.SerializeObject(usuario));
+
+            Crud.Actualizar(usuario);
+            String mensaje = "Usted ha solicitado un cambio de su contraseña en SGSST APP,su token de recuperacion es" + usuario.TokenRecuperarClave;
+            EnviarCorreo(correo, mensaje);
 
         }
-
-        public void EnviarCorreo(Usuario usuario)
+        public Usuario BuscarCorreo(string correo)
         {
+            return Sgsst.GetControlador().usuarios.Where(x => x.Correo == correo).FirstOrDefault();
+        }
 
-            throw new NotImplementedException();
+        public void EnviarCorreo(string correo, string mensaje)
+        {
+            //Configuración del Mensaje
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            //Especificamos el correo desde el que se enviará el Email y el nombre de la persona que lo envía
+            mail.From = new MailAddress("sgsstapp3@gmail.com", "EMPRESA S.A.S");
 
+            //Aquí ponemos el asunto del correo
+            mail.Subject = "Cambio de si contraseña";
+            //Aquí ponemos el mensaje que incluirá el correo
+            mail.Body = mensaje;
+            //Especificamos a quien enviaremos el Email, no es necesario que sea Gmail, puede ser cualquier otro proveedor
+            mail.To.Add(correo);
+
+            SmtpServer.Port = 587; //Puerto que utiliza Gmail para sus servicios
+                                   //Especificamos las credenciales con las que enviaremos el mail
+            SmtpServer.Credentials = new System.Net.NetworkCredential("sgsstapp3@gmail.com", "sgsst123");
+            SmtpServer.EnableSsl = true;
+            SmtpServer.Send(mail);
+
+        }
+        private string encriptar(string input)
+        {
+            SHA256CryptoServiceProvider provider = new SHA256CryptoServiceProvider();
+
+            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+            byte[] hashedBytes = provider.ComputeHash(inputBytes);
+
+            StringBuilder output = new StringBuilder();
+
+            for (int i = 0; i < hashedBytes.Length; i++)
+                output.Append(hashedBytes[i].ToString("x2").ToLower());
+
+            return output.ToString();
         }
 
     }
