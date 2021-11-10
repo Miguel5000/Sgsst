@@ -34,7 +34,7 @@ namespace Logica
 
         }
 
-        public Usuario Get(string token)
+        public Usuario GetToken(string token)
         {
 
             return Sgsst.GetControlador().usuarios.Where(x => x.TokenRecuperarClave == token).FirstOrDefault();
@@ -80,7 +80,7 @@ namespace Logica
             usuario.TokenRecuperarClave = encriptar(JsonConvert.SerializeObject(usuario));
 
             Crud.Actualizar(usuario);
-            String mensaje = "Usted ha solicitado un cambio de su contraseña en SGSST APP,su token de recuperacion es" + usuario.TokenRecuperarClave;
+            String mensaje = "Usted ha solicitado un cambio de su contraseña en SGSST APP,su token de recuperacion es: " + usuario.TokenRecuperarClave;
             EnviarCorreo(correo, mensaje);
 
         }

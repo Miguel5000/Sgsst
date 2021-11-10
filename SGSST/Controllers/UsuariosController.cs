@@ -49,7 +49,7 @@ namespace SGSST.Controllers
         public HttpResponseMessage Get(HttpRequestMessage request, string token)
         {
 
-            Usuario usuario = logicaUsuario.Get(token);
+            Usuario usuario = logicaUsuario.GetToken(token);
 
             if (usuario == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
 
@@ -82,12 +82,16 @@ namespace SGSST.Controllers
         }
 
         [HttpPut]
-        public HttpResponseMessage CambiarClave(HttpRequestMessage request, [FromBody] Usuario usuario)
+        public HttpResponseMessage CambiarClave(HttpRequestMessage request, [FromBody] JObject clave, string token)
         {
 
             HttpResponseMessage validacion = Validador.Validar(request, ModelState);
 
             if (validacion != null) return validacion;
+
+
+            Usuario usuario = logicaUsuario.GetToken(token);
+            usuario.Clave= clave["clave"].ToString();
 
             logicaUsuario.CambiarClave(usuario);
             return new HttpResponseMessage(HttpStatusCode.OK);
