@@ -6,9 +6,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Linq;
-using System.IO;
-using System.Web;
 
 namespace SGSST.Controllers
 {
@@ -140,32 +137,5 @@ namespace SGSST.Controllers
             return new HttpResponseMessage(HttpStatusCode.OK);
 
         }
-
-        [HttpPut]
-        public HttpResponseMessage GuardarArchivo(HttpRequestMessage request, [FromBody] JObject usuario)
-        {
-
-            JArray archivo = (JArray)usuario["archivo"];
-
-            List<byte> bytesArchivo = new List<byte>();
-
-            foreach (JToken byteArchivo in archivo) {
-
-                bytesArchivo.Add(byte.Parse(byteArchivo.ToString()));
-
-            }
-
-            byte[] archivoASubir = bytesArchivo.ToArray();
-
-            string ruta = HttpContext.Current.Server.MapPath("~\\") + "imagen.jpg";
-
-            FileStream fileStream = new FileStream(ruta, FileMode.Create, FileAccess.ReadWrite);
-            fileStream.Write(archivoASubir, 0, archivoASubir.Length);
-            fileStream.Close();
-
-            return new HttpResponseMessage(HttpStatusCode.OK);
-
-        }
-
     }
 }

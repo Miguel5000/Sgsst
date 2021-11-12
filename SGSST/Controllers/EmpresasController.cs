@@ -1,9 +1,12 @@
 ﻿using Entidades;
 using Logica;
+using Newtonsoft.Json.Linq;
 using SGSST.Utilidades;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace SGSST.Controllers
@@ -35,6 +38,34 @@ namespace SGSST.Controllers
 
             logicaEmpresa.Crear(empresa);
             return request.CreateResponse(HttpStatusCode.Created, empresa);
+
+        }
+
+        [HttpPut]
+        public HttpResponseMessage GuardarArchivo(HttpRequestMessage request, [FromBody] JObject usuario, string nombre)
+        {
+
+            JArray archivo = (JArray)usuario["archivo"];
+
+            List<byte> bytesArchivo = new List<byte>();
+
+            foreach (JToken byteArchivo in archivo)
+            {
+
+                bytesArchivo.Add(byte.Parse(byteArchivo.ToString()));
+
+            }
+
+            byte[] archivoASubir = bytesArchivo.ToArray();
+
+            string ruta = HttpContext.Current.Server.MapPath("~//imagenes/") + nombre +"_logo.jpg";
+            string rutaUrl = "https://localhost:44330" + "/imagenes/" + nombre + "_logo.jpg";
+
+            FileStream fileStream = new FileStream(ruta, FileMode.Create, FileAccess.ReadWrite);
+            fileStream.Write(archivoASubir, 0, archivoASubir.Length);
+            fileStream.Close();
+
+            return request.CreateResponse(HttpStatusCode.OK, rutaUrl);
 
         }
 
