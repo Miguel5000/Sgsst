@@ -107,7 +107,7 @@ namespace SGSST.Controllers
             string nombre = datos["nombre"].ToString();
             Usuario usuario = logicaUsuario.GetUsuario(nombre);
             usuario.Clave = datos["clave"].ToString();
-            logicaUsuario.CambiarClave(usuario);
+
             return new HttpResponseMessage(HttpStatusCode.OK);
 
         }

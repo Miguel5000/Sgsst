@@ -17,9 +17,16 @@ namespace Datos
 
         public static void Actualizar(Object entidad)
         {
-
-            Sgsst.GetControlador().Entry(entidad).State = System.Data.Entity.EntityState.Modified;
-            Sgsst.GetControlador().SaveChanges();
+            try
+            {
+                Sgsst.GetControlador().Entry(entidad).State = System.Data.Entity.EntityState.Modified;
+           
+            }
+            catch (InvalidOperationException  )
+            {
+               
+                Sgsst.GetControlador().SaveChanges();
+            }
 
         }
 
