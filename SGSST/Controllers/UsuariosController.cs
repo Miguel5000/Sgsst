@@ -71,8 +71,7 @@ namespace SGSST.Controllers
 
             if (validacion != null) return validacion;
 
-            usuario.IdRol = 3;
-            usuario.IdArea = 4;
+
             logicaUsuario.Crear(usuario);
             return new HttpResponseMessage(HttpStatusCode.Created);
 
@@ -107,6 +106,8 @@ namespace SGSST.Controllers
             string nombre = datos["nombre"].ToString();
             Usuario usuario = logicaUsuario.GetUsuario(nombre);
             usuario.Clave = datos["clave"].ToString();
+
+            logicaUsuario.CambiarClave(usuario);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
 
