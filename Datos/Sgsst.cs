@@ -6,25 +6,12 @@ namespace Datos
     public class Sgsst : DbContext
     {
 
-        private static Sgsst sgsst;
-
-        private Sgsst() : base("name=Sgsst")
+        public Sgsst() : base("name=Sgsst")
         {
 
         }
 
-        public static Sgsst GetControlador() {
-
-            if (sgsst == null) {
-
-                sgsst = new Sgsst();
-
-            }
-
-            return sgsst;
-        
-        }
-
+       
         public DbSet<Acta> actas { get; set; }
         public DbSet<Area> areas { get; set; }
         public DbSet<Asistencia> asistencias { get; set; }

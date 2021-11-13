@@ -12,13 +12,16 @@ namespace Logica
 {
     public class LUsuario
     {
+
+        private Sgsst controlador = new Sgsst();
+
         private static string EMPLEADO = "Empleado";
 
         public List<Usuario> GetEmpleados(Empresa empresa)
         {
 
-            return Sgsst.GetControlador().usuarios.Where(x => x.IdEmpresa == empresa.Id).
-                Join(Sgsst.GetControlador().roles,
+            return this.controlador.usuarios.Where(x => x.IdEmpresa == empresa.Id).
+                Join(this.controlador.roles,
                 usuario => usuario.IdRol,
                 rol => rol.Id,
                 (usuario, rol) => new { u = usuario, r = rol }).
@@ -30,14 +33,14 @@ namespace Logica
         public Usuario Get(Usuario usuario)
         {
 
-            return Sgsst.GetControlador().usuarios.Where(x => x.Correo == usuario.Correo && x.Clave == usuario.Clave).FirstOrDefault();
+            return this.controlador.usuarios.Where(x => x.Correo == usuario.Correo && x.Clave == usuario.Clave).FirstOrDefault();
 
         }
 
         public Usuario GetToken(string token)
         {
 
-            return Sgsst.GetControlador().usuarios.Where(x => x.TokenRecuperarClave == token).FirstOrDefault();
+            return this.controlador.usuarios.Where(x => x.TokenRecuperarClave == token).FirstOrDefault();
 
         }
 
@@ -70,7 +73,7 @@ namespace Logica
         public Rol GetRol(Usuario usuario)
         {
 
-            return Sgsst.GetControlador().roles.Where(x => x.Id == usuario.IdRol).FirstOrDefault();
+            return this.controlador.roles.Where(x => x.Id == usuario.IdRol).FirstOrDefault();
 
         }
 
@@ -86,7 +89,7 @@ namespace Logica
         }
         public Usuario BuscarCorreo(string correo)
         {
-            return Sgsst.GetControlador().usuarios.Where(x => x.Correo == correo).FirstOrDefault();
+            return this.controlador.usuarios.Where(x => x.Correo == correo).FirstOrDefault();
         }
 
         public void EnviarCorreo(string correo, string mensaje)

@@ -20,6 +20,8 @@ namespace SGSST.Controllers
             public TipoActa TipoActa { get; set; }
             public Empresa Empresa { get; set; }
 
+            public bool? publicacion { get; set; }
+
         }
 
         [HttpPost]
@@ -30,7 +32,7 @@ namespace SGSST.Controllers
 
             if (validacion != null) return validacion;
 
-            List<Acta> actas = logicaActa.GetActas(paquete.Grupo, paquete.TipoActa, paquete.Empresa);
+            List<Acta> actas = logicaActa.GetActas(paquete.Grupo, paquete.TipoActa, paquete.Empresa, paquete.publicacion);
 
             if (actas.Count == 0) return new HttpResponseMessage(HttpStatusCode.NotFound);
 
@@ -52,7 +54,7 @@ namespace SGSST.Controllers
 
 
         [HttpPost]
-        public HttpResponseMessage Crear(HttpRequestMessage request, [FromBody]Acta acta)
+        public HttpResponseMessage Crear(HttpRequestMessage request, [FromBody] Acta acta)
         {
 
             HttpResponseMessage validacion = Validador.Validar(request, ModelState);
@@ -60,7 +62,8 @@ namespace SGSST.Controllers
             if (validacion != null) return validacion;
 
             logicaActa.Crear(acta);
-            return new HttpResponseMessage(HttpStatusCode.Created);
+
+            return request.CreateResponse(HttpStatusCode.Created, acta);
 
         }
 

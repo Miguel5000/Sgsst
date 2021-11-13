@@ -8,17 +8,20 @@ namespace Logica
     public class LActa
     {
 
-        public List<Acta> GetActas(GrupoSgsst grupo, TipoActa tipoActa, Empresa empresa) {
+        private Sgsst controlador = new Sgsst();
 
-            return Sgsst.GetControlador().actas.Where(x => x.IdGrupo == grupo.Id && 
+        public List<Acta> GetActas(GrupoSgsst grupo, TipoActa tipoActa, Empresa empresa, bool? publicacion) {
+
+            return this.controlador.actas.Where(x => x.IdGrupo == grupo.Id && 
             x.IdTipo == tipoActa.Id && 
-            x.IdEmpresa == empresa.Id).ToList();
+            x.IdEmpresa == empresa.Id &&
+            x.Publicacion == publicacion).ToList();
 
         }
 
         public Acta Get(int id) {
 
-            return Sgsst.GetControlador().actas.Where(x => x.Id == id).FirstOrDefault();
+            return this.controlador.actas.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
@@ -43,7 +46,7 @@ namespace Logica
 
         public TipoActa GetTipo(int id) {
 
-            return Sgsst.GetControlador().tiposActa.Where(x => x.Id == id).FirstOrDefault();
+            return this.controlador.tiposActa.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
@@ -51,7 +54,7 @@ namespace Logica
 
         public List<Subtema> GetSubtemas(Acta acta) {
 
-            return Sgsst.GetControlador().subtemas.Where(x => x.IdActa == acta.Id).ToList();
+            return this.controlador.subtemas.Where(x => x.IdActa == acta.Id).ToList();
 
         }
 
@@ -77,7 +80,7 @@ namespace Logica
 
         public List<Usuario> GetAsistencias(Acta acta) {
 
-            return Sgsst.GetControlador().asistencias.Where(x => x.IdActa == acta.Id).Join(Sgsst.GetControlador().usuarios,
+            return this.controlador.asistencias.Where(x => x.IdActa == acta.Id).Join(this.controlador.usuarios,
                 asistencia => asistencia.IdUsuario,
                 usuario => usuario.Id,
                 (asistencia, usuario) => usuario).ToList();

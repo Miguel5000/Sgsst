@@ -8,9 +8,11 @@ namespace Logica
     public class LLugar
     {
 
+        private Sgsst controlador = new Sgsst();
+
         public List<Lugar> GetLugares(Empresa empresa) {
 
-            return Sgsst.GetControlador().lugares.Where(x => x.IdEmpresa == empresa.Id).ToList();
+            return this.controlador.lugares.Where(x => x.IdEmpresa == empresa.Id).ToList();
 
         }
 

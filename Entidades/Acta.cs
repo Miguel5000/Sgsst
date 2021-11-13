@@ -24,6 +24,7 @@ namespace Entidades
         private string tema;
         private string desarrollo;
         private string conclusion;
+        private bool? publicacion;
 
         [Key]
         [Column("id")]
@@ -76,6 +77,10 @@ namespace Entidades
         [Required(ErrorMessage = "El acta debe tener la conclusión de la reunión")]
         [Column("conclusion")]
         public string Conclusion { get => conclusion; set => conclusion = value; }
+
+        [Required(ErrorMessage = "El acta debe tener un estado de publicacion")]
+        [Column("publicacion")]
+        public bool? Publicacion { get => publicacion; set => publicacion = value; }
 
     }
 

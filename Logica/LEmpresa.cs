@@ -8,9 +8,11 @@ namespace Logica
 {
     public class LEmpresa
     {
+
+        private Sgsst controlador = new Sgsst();
         public Empresa Get(int id) {
 
-            return Sgsst.GetControlador().empresas.Where(x => x.Id == id).FirstOrDefault();
+            return this.controlador.empresas.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
@@ -24,13 +26,13 @@ namespace Logica
 
         public List<TipoBrigada> GetBrigadas() {
 
-            return Sgsst.GetControlador().tiposBrigada.ToList();
+            return this.controlador.tiposBrigada.ToList();
 
         }
 
         public TipoBrigada GetBrigada(int id){
 
-            return Sgsst.GetControlador().tiposBrigada.Where(x => x.Id == id).FirstOrDefault();
+            return this.controlador.tiposBrigada.Where(x => x.Id == id).FirstOrDefault();
 
         }
 

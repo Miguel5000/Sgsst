@@ -8,22 +8,23 @@ namespace Logica
 {
     public class LCasoAcosoLaboral
     {
+        private Sgsst controlador = new Sgsst();
 
         public List<CasoAcosoLaboral> GetCasos(Empresa empresa) {
 
-            return Sgsst.GetControlador().casos.Where(x => x.IdEmpresa == empresa.Id).ToList();
+            return this.controlador.casos.Where(x => x.IdEmpresa == empresa.Id).ToList();
 
         }
 
         public List<CasoAcosoLaboral> GetCasos(Usuario usuario) {
 
-            return Sgsst.GetControlador().casos.Where(x => x.IdCreador == usuario.Id).ToList();
+            return this.controlador.casos.Where(x => x.IdCreador == usuario.Id).ToList();
 
         }
 
         public CasoAcosoLaboral Get(int id) {
 
-            return Sgsst.GetControlador().casos.Where(x => x.Id == id).FirstOrDefault();
+            return this.controlador.casos.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
@@ -35,13 +36,13 @@ namespace Logica
 
         public EstadoCaso GetEstado(int id) {
 
-            return Sgsst.GetControlador().estadosCaso.Where(x => x.Id == id).FirstOrDefault();
+            return this.controlador.estadosCaso.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
         public List<CausaCaso> GetCausas() {
 
-            return Sgsst.GetControlador().causas.ToList();
+            return this.controlador.causas.ToList();
 
         }
 

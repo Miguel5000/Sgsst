@@ -9,9 +9,11 @@ namespace Logica
     public class LArea
     {
 
+        private Sgsst controlador = new Sgsst();
+
         public List<Area> GetAreas(Empresa empresa) {
 
-            return Sgsst.GetControlador().areas.Where(x => x.IdEmpresa == empresa.Id).ToList();
+            return this.controlador.areas.Where(x => x.IdEmpresa == empresa.Id).ToList();
 
         }
 

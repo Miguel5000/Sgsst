@@ -17,7 +17,7 @@ namespace SGSST.Controllers
 
         private LUsuario logicaUsuario = new LUsuario();
 
-        [HttpGet]
+        [HttpPost]
         public HttpResponseMessage GetEmpleados(HttpRequestMessage request, Empresa empresa)
         {
 

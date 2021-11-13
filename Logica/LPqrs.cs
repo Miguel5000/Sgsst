@@ -8,22 +8,24 @@ namespace Logica
     public class LPqrs
     {
 
+        private Sgsst controlador = new Sgsst();
+
         public List<Pqrs> GetListaPqrs(Empresa empresa) {
 
-            return Sgsst.GetControlador().pqrs.Where(x => x.IdEmpresa == empresa.Id).ToList();
+            return controlador.pqrs.Where(x => x.IdEmpresa == empresa.Id).ToList();
 
         }
 
         public List<Pqrs> GetListaPqrs(Usuario usuario)
         {
 
-            return Sgsst.GetControlador().pqrs.Where(x => x.IdUsuario == usuario.Id).ToList();
+            return this.controlador.pqrs.Where(x => x.IdUsuario == usuario.Id).ToList();
 
         }
 
         public Pqrs Get(int id) {
 
-            return Sgsst.GetControlador().pqrs.Where(x => x.Id == id).FirstOrDefault();
+            return this.controlador.pqrs.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
@@ -36,7 +38,7 @@ namespace Logica
 
         public List<TipoPqrs> GetTipos() {
 
-            return Sgsst.GetControlador().tiposPqrs.ToList();
+            return this.controlador.tiposPqrs.ToList();
 
         }
 

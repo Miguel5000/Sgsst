@@ -7,15 +7,17 @@ namespace Logica
 {
     public class LInformeMejora
     {
+        private Sgsst controlador = new Sgsst();
+
         public List<InformeMejora> GetInformes(Empresa empresa) {
 
-            return Sgsst.GetControlador().informes.Where(x => x.IdEmpresa == empresa.Id).ToList();
+            return this.controlador.informes.Where(x => x.IdEmpresa == empresa.Id).ToList();
 
         }
 
         public InformeMejora Get(int id) {
 
-            return Sgsst.GetControlador().informes.Where(x => x.Id == id).FirstOrDefault();
+            return this.controlador.informes.Where(x => x.Id == id).FirstOrDefault();
 
         }
 
