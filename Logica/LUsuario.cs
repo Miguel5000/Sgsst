@@ -74,6 +74,13 @@ namespace Logica
 
         }
 
+        public Usuario GetUsuario(string nombre)
+        {
+
+            return Sgsst.GetControlador().usuarios.Where(x => x.Nombre == nombre).FirstOrDefault();
+
+        }
+
         public void GenerarToken(string correo) {
 
             Usuario usuario = BuscarCorreo(correo);

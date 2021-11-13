@@ -95,6 +95,23 @@ namespace SGSST.Controllers
 
         }
 
+        [HttpPut]
+        public HttpResponseMessage CambiarContrasena(HttpRequestMessage request, [FromBody] JObject datos)
+        {
+
+            HttpResponseMessage validacion = Validador.Validar(request, ModelState);
+
+            if (validacion != null) return validacion;
+
+           
+            string nombre = datos["nombre"].ToString();
+            Usuario usuario = logicaUsuario.GetUsuario(nombre);
+            usuario.Clave = datos["clave"].ToString();
+            logicaUsuario.CambiarClave(usuario);
+            return new HttpResponseMessage(HttpStatusCode.OK);
+
+        }
+
         [HttpDelete]
         public HttpResponseMessage Eliminar(HttpRequestMessage request, [FromBody] Usuario usuario)
         {
