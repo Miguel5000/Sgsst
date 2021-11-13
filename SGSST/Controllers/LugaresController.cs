@@ -14,6 +14,22 @@ namespace SGSST.Controllers
         private LLugar logicaLugar = new LLugar();
 
         [HttpPost]
+        public HttpResponseMessage GetLugar(HttpRequestMessage request, [FromBody] Acta acta)
+        {
+
+            HttpResponseMessage validacion = Validador.Validar(request, ModelState);
+
+            if (validacion != null) return validacion;
+
+            Lugar lugar = logicaLugar.Get(acta);
+
+            if (lugar == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            return request.CreateResponse(HttpStatusCode.OK, lugar);
+
+        }
+
+        [HttpPost]
         public HttpResponseMessage GetLugares(HttpRequestMessage request, [FromBody] Empresa empresa)
         {
 

@@ -19,7 +19,6 @@ namespace SGSST.Controllers
             public GrupoSgsst Grupo { get; set; }
             public TipoActa TipoActa { get; set; }
             public Empresa Empresa { get; set; }
-
             public bool? publicacion { get; set; }
 
         }
@@ -27,10 +26,6 @@ namespace SGSST.Controllers
         [HttpPost]
         public HttpResponseMessage GetActas(HttpRequestMessage request, [FromBody]PaqueteGetActas paquete)
         {
-
-            HttpResponseMessage validacion = Validador.Validar(request, ModelState);
-
-            if (validacion != null) return validacion;
 
             List<Acta> actas = logicaActa.GetActas(paquete.Grupo, paquete.TipoActa, paquete.Empresa, paquete.publicacion);
 
@@ -87,6 +82,22 @@ namespace SGSST.Controllers
             HttpResponseMessage validacion = Validador.Validar(request, ModelState);
 
             if (validacion != null) return validacion;
+
+            List<Subtema> subtemas = logicaActa.GetSubtemas(acta);
+            List<Asistencia> asistencias = logicaActa.GetVerdaderasAsistencias(acta);
+
+            foreach (Subtema subtema in subtemas) {
+
+                logicaActa.EliminarSubtema(subtema);
+
+            }
+
+            foreach (Asistencia asistencia in asistencias)
+            {
+
+                logicaActa.EliminarAsistencia(asistencia);
+
+            }
 
             logicaActa.Eliminar(acta);
             return new HttpResponseMessage(HttpStatusCode.OK);
@@ -173,6 +184,22 @@ namespace SGSST.Controllers
             if (validacion != null) return validacion;
 
             List<Usuario> usuarios = logicaActa.GetAsistencias(acta);
+
+            if (usuarios.Count == 0) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            return request.CreateResponse(HttpStatusCode.OK, usuarios);
+
+        }
+
+        [HttpPost]
+        public HttpResponseMessage GetVerdaderasAsistencias(HttpRequestMessage request, [FromBody] Acta acta)
+        {
+
+            HttpResponseMessage validacion = Validador.Validar(request, ModelState);
+
+            if (validacion != null) return validacion;
+
+            List<Asistencia> usuarios = logicaActa.GetVerdaderasAsistencias(acta);
 
             if (usuarios.Count == 0) return new HttpResponseMessage(HttpStatusCode.NotFound);
 

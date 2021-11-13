@@ -87,6 +87,13 @@ namespace Logica
 
         }
 
+        public List<Asistencia> GetVerdaderasAsistencias(Acta acta)
+        {
+
+            return this.controlador.asistencias.Where(x => x.IdActa == acta.Id).ToList();
+
+        }
+
         public void CrearAsistencia(Asistencia asistencia) {
 
             Crud.Insertar(asistencia);

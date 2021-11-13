@@ -16,6 +16,12 @@ namespace Logica
 
         }
 
+        public Lugar Get(Acta acta) {
+
+            return this.controlador.lugares.Where(x => x.Id == acta.IdLugar).FirstOrDefault();
+
+        }
+
         public void Crear(Lugar lugar) {
 
             Crud.Insertar(lugar);
