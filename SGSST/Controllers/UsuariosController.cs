@@ -6,9 +6,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Linq;
-using System.IO;
-using System.Web;
 
 namespace SGSST.Controllers
 {
@@ -74,8 +71,7 @@ namespace SGSST.Controllers
 
             if (validacion != null) return validacion;
 
-            usuario.IdRol = 3;
-            usuario.IdArea = 4;
+
             logicaUsuario.Crear(usuario);
             return new HttpResponseMessage(HttpStatusCode.Created);
 
@@ -94,6 +90,25 @@ namespace SGSST.Controllers
             usuario.Clave= clave["clave"].ToString();
 
             logicaUsuario.CambiarClave(usuario);
+            return new HttpResponseMessage(HttpStatusCode.OK);
+
+        }
+
+        [HttpPut]
+        public HttpResponseMessage CambiarContrasena(HttpRequestMessage request, [FromBody] JObject datos)
+        {
+
+            HttpResponseMessage validacion = Validador.Validar(request, ModelState);
+
+            if (validacion != null) return validacion;
+
+           
+            string nombre = datos["nombre"].ToString();
+            Usuario usuario = logicaUsuario.GetUsuario(nombre);
+            usuario.Clave = datos["clave"].ToString();
+
+            logicaUsuario.CambiarClave(usuario);
+
             return new HttpResponseMessage(HttpStatusCode.OK);
 
         }
@@ -140,32 +155,5 @@ namespace SGSST.Controllers
             return new HttpResponseMessage(HttpStatusCode.OK);
 
         }
-
-        [HttpPut]
-        public HttpResponseMessage GuardarArchivo(HttpRequestMessage request, [FromBody] JObject usuario)
-        {
-
-            JArray archivo = (JArray)usuario["archivo"];
-
-            List<byte> bytesArchivo = new List<byte>();
-
-            foreach (JToken byteArchivo in archivo) {
-
-                bytesArchivo.Add(byte.Parse(byteArchivo.ToString()));
-
-            }
-
-            byte[] archivoASubir = bytesArchivo.ToArray();
-
-            string ruta = HttpContext.Current.Server.MapPath("~\\") + "imagen.jpg";
-
-            FileStream fileStream = new FileStream(ruta, FileMode.Create, FileAccess.ReadWrite);
-            fileStream.Write(archivoASubir, 0, archivoASubir.Length);
-            fileStream.Close();
-
-            return new HttpResponseMessage(HttpStatusCode.OK);
-
-        }
-
     }
 }

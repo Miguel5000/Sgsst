@@ -25,6 +25,16 @@ namespace Datos
 
             controlador.Entry(entidad).State = System.Data.Entity.EntityState.Modified;
             controlador.SaveChanges();
+            try
+            {
+                controlador.Entry(entidad).State = System.Data.Entity.EntityState.Modified;
+           
+            }
+            catch (InvalidOperationException  )
+            {
+               
+                controlador.SaveChanges();
+            }
 
         }
 
