@@ -13,6 +13,18 @@ namespace SGSST.Controllers
 
         private LArea logicaArea = new LArea();
 
+        [HttpGet]
+        public HttpResponseMessage Get(HttpRequestMessage request, int id)
+        {
+
+            Area area = logicaArea.Get(id);
+
+            if (area == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            return request.CreateResponse(HttpStatusCode.OK, area);
+
+        }
+
         [HttpPost]
         public HttpResponseMessage GetAreas(HttpRequestMessage request, [FromBody] Empresa empresa)
         {
@@ -65,6 +77,32 @@ namespace SGSST.Controllers
 
             logicaArea.Eliminar(area);
             return new HttpResponseMessage(HttpStatusCode.OK);
+
+        }
+
+        [HttpPost]
+        public HttpResponseMessage IsAgregable(HttpRequestMessage request, [FromBody] Area area)
+        {
+
+            HttpResponseMessage validacion = Validador.Validar(request, ModelState);
+
+            if (validacion != null) return validacion;
+
+            bool respuesta = logicaArea.IsAgregable(area);
+            return request.CreateResponse(HttpStatusCode.OK, respuesta);
+
+        }
+
+        [HttpPost]
+        public HttpResponseMessage IsEliminable(HttpRequestMessage request, [FromBody] Area area)
+        {
+
+            HttpResponseMessage validacion = Validador.Validar(request, ModelState);
+
+            if (validacion != null) return validacion;
+
+            bool respuesta = logicaArea.IsEliminable(area);
+            return request.CreateResponse(HttpStatusCode.OK, respuesta);
 
         }
 

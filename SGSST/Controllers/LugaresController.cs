@@ -13,6 +13,18 @@ namespace SGSST.Controllers
 
         private LLugar logicaLugar = new LLugar();
 
+        [HttpGet]
+        public HttpResponseMessage Get(HttpRequestMessage request, int id)
+        {
+
+            Lugar lugar = logicaLugar.Get(id);
+
+            if (lugar == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            return request.CreateResponse(HttpStatusCode.OK, lugar);
+
+        }
+
         [HttpPost]
         public HttpResponseMessage GetLugar(HttpRequestMessage request, [FromBody] Acta acta)
         {
@@ -83,6 +95,33 @@ namespace SGSST.Controllers
             return new HttpResponseMessage(HttpStatusCode.OK);
 
         }
+
+        [HttpPost]
+        public HttpResponseMessage IsAgregable(HttpRequestMessage request, [FromBody] Lugar lugar)
+        {
+
+            HttpResponseMessage validacion = Validador.Validar(request, ModelState);
+
+            if (validacion != null) return validacion;
+
+            bool respuesta = logicaLugar.IsAgregable(lugar);
+            return request.CreateResponse(HttpStatusCode.OK, respuesta);
+
+        }
+
+        [HttpPost]
+        public HttpResponseMessage IsEliminable(HttpRequestMessage request, [FromBody] Lugar lugar)
+        {
+
+            HttpResponseMessage validacion = Validador.Validar(request, ModelState);
+
+            if (validacion != null) return validacion;
+
+            bool respuesta = logicaLugar.IsEliminable(lugar);
+            return request.CreateResponse(HttpStatusCode.OK, respuesta);
+
+        }
+
 
     }
 }

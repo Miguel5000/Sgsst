@@ -11,6 +11,13 @@ namespace Logica
 
         private Sgsst controlador = new Sgsst();
 
+        public Area Get(int id)
+        {
+
+            return this.controlador.areas.Where(x => x.Id == id).FirstOrDefault();
+
+        }
+
         public List<Area> GetAreas(Empresa empresa) {
 
             return this.controlador.areas.Where(x => x.IdEmpresa == empresa.Id).ToList();
@@ -34,6 +41,20 @@ namespace Logica
         {
 
             Crud.Eliminar(area);
+
+        }
+
+        public bool IsAgregable(Area area)
+        {
+
+            return (this.controlador.lugares.Where(x => x.IdEmpresa == area.IdEmpresa && x.Nombre == area.Nombre).Count() > 0) ? false : true;
+
+        }
+
+        public bool IsEliminable(Area area)
+        {
+
+            return (this.controlador.usuarios.Where(x => x.IdArea == area.Id).Count() > 0) ? false : true;
 
         }
 
