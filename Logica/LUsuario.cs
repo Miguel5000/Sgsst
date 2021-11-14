@@ -77,6 +77,12 @@ namespace Logica
 
         }
 
+        public List<Rol> GetRoles() {
+
+            return this.controlador.roles.ToList();
+
+        }
+
         public Usuario GetUsuario(string nombre)
         {
 
@@ -121,6 +127,30 @@ namespace Logica
             SmtpServer.Send(mail);
 
         }
+
+        public void EnviarCorreoCreacion(string correo, string clave)
+        {
+            //Configuración del Mensaje
+            MailMessage mail = new MailMessage();
+            SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+            //Especificamos el correo desde el que se enviará el Email y el nombre de la persona que lo envía
+            mail.From = new MailAddress("sgsstapp3@gmail.com", "EMPRESA S.A.S");
+
+            //Aquí ponemos el asunto del correo
+            mail.Subject = "Creción de cuenta";
+            //Aquí ponemos el mensaje que incluirá el correo
+            mail.Body = "Su cuenta en SGSST App ha sido creada exitosamente. Ingrese con la siguiente contraseña " + clave + "\nPuede cambiarla en cualquier momento.";
+            //Especificamos a quien enviaremos el Email, no es necesario que sea Gmail, puede ser cualquier otro proveedor
+            mail.To.Add(correo);
+
+            SmtpServer.Port = 587; //Puerto que utiliza Gmail para sus servicios
+                                   //Especificamos las credenciales con las que enviaremos el mail
+            SmtpServer.Credentials = new System.Net.NetworkCredential("sgsstapp3@gmail.com", "sgsst123");
+            SmtpServer.EnableSsl = true;
+            SmtpServer.Send(mail);
+
+        }
+
         private string encriptar(string input)
         {
             SHA256CryptoServiceProvider provider = new SHA256CryptoServiceProvider();
@@ -134,6 +164,13 @@ namespace Logica
                 output.Append(hashedBytes[i].ToString("x2").ToLower());
 
             return output.ToString();
+        }
+
+        public bool IsAgregable(Usuario usuario)
+        {
+
+            return (this.controlador.usuarios.Where(x => x.Correo == usuario.Correo || x.Celular == usuario.Celular).Count() > 0) ? false : true;
+
         }
 
     }

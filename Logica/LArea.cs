@@ -18,6 +18,12 @@ namespace Logica
 
         }
 
+        public Area Get(Usuario usuario) {
+
+            return this.controlador.areas.Where(x => x.Id == usuario.IdArea).FirstOrDefault();
+
+        }
+
         public List<Area> GetAreas(Empresa empresa) {
 
             return this.controlador.areas.Where(x => x.IdEmpresa == empresa.Id).ToList();

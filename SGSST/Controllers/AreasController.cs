@@ -26,6 +26,22 @@ namespace SGSST.Controllers
         }
 
         [HttpPost]
+        public HttpResponseMessage GetParaUsuario(HttpRequestMessage request, Usuario usuario)
+        {
+
+            HttpResponseMessage validacion = Validador.Validar(request, ModelState);
+
+            if (validacion != null) return validacion;
+
+            Area area = logicaArea.Get(usuario);
+
+            if (area == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            return request.CreateResponse(HttpStatusCode.OK, area);
+
+        }
+
+        [HttpPost]
         public HttpResponseMessage GetAreas(HttpRequestMessage request, [FromBody] Empresa empresa)
         {
 

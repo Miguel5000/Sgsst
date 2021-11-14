@@ -30,6 +30,18 @@ namespace SGSST.Controllers
 
         }
 
+        [HttpGet]
+        public HttpResponseMessage GetRoles(HttpRequestMessage request)
+        {
+
+            List<Rol> roles = logicaUsuario.GetRoles();
+
+            if (roles.Count == 0) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            return request.CreateResponse(HttpStatusCode.OK, roles);
+
+        }
+
         [HttpPost]
         public HttpResponseMessage IniciarSesion(HttpRequestMessage request, [FromBody] Usuario usuario)
         {
@@ -155,5 +167,26 @@ namespace SGSST.Controllers
             return new HttpResponseMessage(HttpStatusCode.OK);
 
         }
+
+        [HttpPost]
+        public HttpResponseMessage IsAgregable(HttpRequestMessage request, [FromBody] Usuario usuario)
+        {
+
+            HttpResponseMessage validacion = Validador.Validar(request, ModelState);
+
+            if (validacion != null) return validacion;
+
+            bool respuesta = logicaUsuario.IsAgregable(usuario);
+            return request.CreateResponse(HttpStatusCode.OK, respuesta);
+
+        }
+
+        [HttpGet]
+        public HttpResponseMessage EnviarCorreoCreacion(HttpRequestMessage request, string correo, string clave)
+        {
+            logicaUsuario.EnviarCorreoCreacion(correo, clave);
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
     }
 }
