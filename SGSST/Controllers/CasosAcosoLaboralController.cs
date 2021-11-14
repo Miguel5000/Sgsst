@@ -66,8 +66,8 @@ namespace SGSST.Controllers
             if (validacion != null) return validacion;
 
             logicaCasos.Crear(caso);
-            return new HttpResponseMessage(HttpStatusCode.Created);
 
+            return request.CreateResponse(HttpStatusCode.Created, caso);
         }
 
         [HttpGet]
@@ -79,6 +79,18 @@ namespace SGSST.Controllers
             if (estado == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
 
             return request.CreateResponse(HttpStatusCode.OK, estado);
+
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetCausa(HttpRequestMessage request, int id)
+        {
+
+            CausaCaso causa = logicaCasos.GetCausa(id);
+
+            if (causa == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            return request.CreateResponse(HttpStatusCode.OK, causa);
 
         }
 
@@ -104,6 +116,18 @@ namespace SGSST.Controllers
 
             logicaCasos.CrearInvolucrado(involucracion);
             return new HttpResponseMessage(HttpStatusCode.Created);
+
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetInvolucraciones(HttpRequestMessage request, int id)
+        {
+
+            List<InvolucradosEnCaso> involucraciones = logicaCasos.GetInvolucraciones(id);
+
+            if (involucraciones.Count == 0) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            return request.CreateResponse(HttpStatusCode.OK, involucraciones);
 
         }
 

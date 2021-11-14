@@ -55,6 +55,18 @@ namespace SGSST.Controllers
         }
 
         [HttpGet]
+        public HttpResponseMessage GetPorId(HttpRequestMessage request, int id)
+        {
+
+            Usuario usuario = logicaUsuario.Get(id);
+
+            if (usuario == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            return request.CreateResponse(HttpStatusCode.OK, usuario);
+
+        }
+
+        [HttpGet]
         public HttpResponseMessage Get(HttpRequestMessage request, string token)
         {
 

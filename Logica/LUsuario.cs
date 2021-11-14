@@ -30,6 +30,12 @@ namespace Logica
 
         }
 
+        public Usuario Get(int id) {
+
+            return this.controlador.usuarios.Where(x => x.Id == id).FirstOrDefault();
+
+        }
+
         public Usuario Get(Usuario usuario)
         {
 

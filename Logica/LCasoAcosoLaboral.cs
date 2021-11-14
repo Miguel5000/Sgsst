@@ -40,6 +40,12 @@ namespace Logica
 
         }
 
+        public CausaCaso GetCausa(int id) {
+
+            return this.controlador.causas.Where(x => x.Id == id).FirstOrDefault();
+
+        }
+
         public List<CausaCaso> GetCausas() {
 
             return this.controlador.causas.ToList();
@@ -49,6 +55,12 @@ namespace Logica
         public void CrearInvolucrado(InvolucradosEnCaso involucracion) {
 
             Crud.Insertar(involucracion);
+
+        }
+
+        public List<InvolucradosEnCaso> GetInvolucraciones(int id) {
+
+            return this.controlador.involucraciones.Where(x => x.IdReporte == id).ToList();
 
         }
 
