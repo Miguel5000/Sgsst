@@ -16,6 +16,7 @@ namespace Entidades
         private int? año;
         private string temas; //JArray
         private string medidas;  //JArray
+        private bool? publicacion;
 
         [Key]
         [Column("id")]
@@ -37,6 +38,10 @@ namespace Entidades
         [Required(ErrorMessage = "El informe debe tener las medidas tomadas en la reunión")]
         [Column("medidas")]
         public string Medidas { get => medidas; set => medidas = value; }
+
+        [Required(ErrorMessage = "El acta debe tener un estado de publicacion")]
+        [Column("publicacion")]
+        public bool? Publicacion { get => publicacion; set => publicacion = value; }
 
     }
 
