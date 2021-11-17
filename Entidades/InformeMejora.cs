@@ -13,7 +13,7 @@ namespace Entidades
 
         private int? id;
         private int? idEmpresa;
-        private int? año;
+        private int? anio;
         private string temas; //JArray
         private string medidas;  //JArray
         private bool? publicacion;
@@ -29,7 +29,7 @@ namespace Entidades
         [Required(ErrorMessage = "El informe debe tener un año asociado")]
         [Index(IsUnique = true)]
         [Column("año")]
-        public int? Año { get => año; set => año = value; }
+        public int? Anio { get => anio; set => anio = value; }
 
         [Required(ErrorMessage = "El informe debe tener los temas hablados en la reunión")]
         [Column("temas")]

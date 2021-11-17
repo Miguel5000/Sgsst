@@ -9,9 +9,9 @@ namespace Logica
     {
         private Sgsst controlador = new Sgsst();
 
-        public List<InformeMejora> GetInformes(Empresa empresa) {
+        public List<InformeMejora> GetInformes(int idEmpresa) {
 
-            return this.controlador.informes.Where(x => x.IdEmpresa == empresa.Id).ToList();
+            return this.controlador.informes.Where(x => x.IdEmpresa == idEmpresa && x.Publicacion == true).ToList();
 
         }
 
@@ -31,6 +31,11 @@ namespace Logica
 
             Crud.Actualizar(informe);
 
+        }
+
+        public InformeMejora GetUltimo()
+        {
+            return this.controlador.informes.Where(x => x.Publicacion == false).OrderByDescending(x => x.Id).FirstOrDefault();
         }
 
     }
