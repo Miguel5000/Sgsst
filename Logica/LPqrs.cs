@@ -10,9 +10,9 @@ namespace Logica
 
         private Sgsst controlador = new Sgsst();
 
-        public List<Pqrs> GetListaPqrs(Empresa empresa) {
+        public List<Pqrs> GetListaPqrs(int idEmpresa, int idGrupo) {
 
-            return controlador.pqrs.Where(x => x.IdEmpresa == empresa.Id).ToList();
+            return controlador.pqrs.Where(x => x.IdEmpresa == idEmpresa && x.IdGrupo == idGrupo).ToList();
 
         }
 
@@ -33,6 +33,12 @@ namespace Logica
         {
 
             Crud.Insertar(pqrs);
+
+        }
+
+        public TipoPqrs GetTipo(int id) {
+
+            return this.controlador.tiposPqrs.Where(x => x.Id == id).FirstOrDefault();
 
         }
 

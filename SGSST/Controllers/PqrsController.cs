@@ -13,15 +13,15 @@ namespace SGSST.Controllers
 
         private LPqrs logicaPqrs = new LPqrs();
 
-        [HttpPost]
-        public HttpResponseMessage GetListaPqrsPorEmpresa(HttpRequestMessage request, [FromBody] Empresa empresa)
+        [HttpGet]
+        public HttpResponseMessage GetListaPqrsPorGrupo(HttpRequestMessage request, int idEmpresa, int idGrupo)
         {
 
             HttpResponseMessage validacion = Validador.Validar(request, ModelState);
 
             if (validacion != null) return validacion;
 
-            List<Pqrs> listaPqrs = logicaPqrs.GetListaPqrs(empresa);
+            List<Pqrs> listaPqrs = logicaPqrs.GetListaPqrs(idEmpresa, idGrupo);
 
             if (listaPqrs.Count == 0) return new HttpResponseMessage(HttpStatusCode.NotFound);
 
@@ -65,6 +65,18 @@ namespace SGSST.Controllers
 
             logicaPqrs.Crear(pqrs);
             return new HttpResponseMessage(HttpStatusCode.Created);
+
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetTipo(HttpRequestMessage request, int id)
+        {
+
+            TipoPqrs tipo = logicaPqrs.GetTipo(id);
+
+            if (tipo == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            return request.CreateResponse(HttpStatusCode.OK, tipo);
 
         }
 
