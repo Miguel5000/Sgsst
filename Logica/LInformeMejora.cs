@@ -11,7 +11,7 @@ namespace Logica
 
         public List<InformeMejora> GetInformes(int idEmpresa) {
 
-            return this.controlador.informes.Where(x => x.IdEmpresa == idEmpresa && x.Publicacion == true).ToList();
+            return this.controlador.informes.Where(x => x.IdEmpresa == idEmpresa && x.Publicacion == true).OrderBy(x => x.Anio).ToList();
 
         }
 
@@ -33,9 +33,9 @@ namespace Logica
 
         }
 
-        public InformeMejora GetUltimo()
+        public InformeMejora GetUltimo(int idEmpresa)
         {
-            return this.controlador.informes.Where(x => x.Publicacion == false).OrderByDescending(x => x.Id).FirstOrDefault();
+            return this.controlador.informes.Where(x => x.Publicacion == false && x.IdEmpresa == idEmpresa).OrderByDescending(x => x.Id).FirstOrDefault();
         }
 
     }

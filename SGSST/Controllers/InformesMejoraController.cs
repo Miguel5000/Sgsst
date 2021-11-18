@@ -67,10 +67,10 @@ namespace SGSST.Controllers
         }
 
         [HttpGet]
-        public HttpResponseMessage GetUltimo(HttpRequestMessage request)
+        public HttpResponseMessage GetUltimo(HttpRequestMessage request, int idEmpresa)
         {
 
-            InformeMejora informe = logicaInforme.GetUltimo();
+            InformeMejora informe = logicaInforme.GetUltimo(idEmpresa);
 
             if (informe == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
 
