@@ -38,5 +38,9 @@ namespace Logica
             return this.controlador.informes.Where(x => x.Publicacion == false && x.IdEmpresa == idEmpresa).OrderByDescending(x => x.Id).FirstOrDefault();
         }
 
+        public InformeMejora GetUltimoPublicado(int idEmpresa)
+        {
+            return this.controlador.informes.Where(x => x.IdEmpresa == idEmpresa && x.Publicacion == true).OrderByDescending(x => x.Id).FirstOrDefault();
+        }
     }
 }

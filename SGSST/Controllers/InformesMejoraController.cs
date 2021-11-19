@@ -77,5 +77,17 @@ namespace SGSST.Controllers
             return request.CreateResponse(HttpStatusCode.OK, informe);
 
         }
+
+        [HttpGet]
+        public HttpResponseMessage GetUltimoPublicado(HttpRequestMessage request, int idEmpresa)
+        {
+
+            InformeMejora informe = logicaInforme.GetUltimoPublicado(idEmpresa);
+
+            if (informe == null) return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            return request.CreateResponse(HttpStatusCode.OK, informe);
+
+        }
     }
 }
