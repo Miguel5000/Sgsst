@@ -10,9 +10,9 @@ namespace Logica
         private Sgsst controlador = new Sgsst();
 
         public List<InformeMejora> GetInformes(int idEmpresa) {
-
-            return this.controlador.informes.Where(x => x.IdEmpresa == idEmpresa && x.Publicacion == true).OrderBy(x => x.Anio).ToList();
-
+            InformeMejora ultimoRegistro = this.controlador.informes.Where(x => x.IdEmpresa == idEmpresa && x.Publicacion == true).OrderByDescending(x => x.Id).FirstOrDefault();
+            List<InformeMejora> listaInformes = this.controlador.informes.Where(x => x.IdEmpresa == idEmpresa && x.Publicacion == true && x.Id != ultimoRegistro.Id).OrderBy(x => x.Id).ThenBy(x => x.Anio).ToList();
+            return listaInformes;
         }
 
         public InformeMejora Get(int id) {
