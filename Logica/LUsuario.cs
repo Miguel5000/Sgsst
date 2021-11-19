@@ -15,7 +15,7 @@ namespace Logica
 
         private Sgsst controlador = new Sgsst();
 
-        private static string EMPLEADOR = "Empleador";
+        private static string DIRECTOR = "Director del SGSST";
 
         public List<Usuario> GetEmpleados(Empresa empresa)
         {
@@ -25,7 +25,7 @@ namespace Logica
                 usuario => usuario.IdRol,
                 rol => rol.Id,
                 (usuario, rol) => new { u = usuario, r = rol }).
-                Where(y => y.r.Nombre != LUsuario.EMPLEADOR).
+                Where(y => y.r.Nombre != LUsuario.DIRECTOR).
                 Select(z => z.u).ToList();
 
         }
